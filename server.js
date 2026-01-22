@@ -5,11 +5,12 @@ const app = express();
 app.use(express.json({ limit: '10mb' }));
 
 const pool = mysql.createPool({
-  host: "bzksakfqv7kdpsnpv6iv-mysql.services.clever-cloud.com",
-  user: "uvfyagtdrmgbenqi",
-  password: "fENWanJkBynN9V4zUdj",
-  database: "bzksakfqv7kdpsnpv6iv",
-  port: 3306,
+  DB_HOST = bzksakfqv7kdpsnvi-mysql.services.clever-cloud.com
+  DB_USER = uvfyagtdrmgbenq
+  DB_PASS = fENWanJkBynN9V4ZUdj
+  DB_NAME = bzksakfqv7kdpsnvi
+  DB_PORT = 3306
+
   ssl: { rejectUnauthorized: false },
   waitForConnections: true,
   connectionLimit: 5
@@ -78,4 +79,5 @@ app.get("/", (req, res) => {
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log("API running on port", PORT));
+
 
