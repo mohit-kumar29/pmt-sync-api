@@ -3,6 +3,11 @@ import mysql from "mysql2/promise";
 
 const app = express();
 app.use(express.json({ limit: '10mb' }));
+// Health check
+app.get("/health", (req, res) => {
+  res.json({ status: "ok", message: "API is running" });
+});
+
 
 const pool = mysql.createPool({
   DB_HOST = bzksakfqv7kdpsnvi-mysql.services.clever-cloud.com
@@ -15,6 +20,17 @@ const pool = mysql.createPool({
   waitForConnections: true,
   connectionLimit: 5
 });
+// Test DB connection
+app.get("/test-db", async (req, res) => {
+  try {
+    const [rows] = await pool.query("SELECT 1 AS test");
+    res.json({ success: true, result: rows });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
 
 app.post("/sync", async (req, res) => {
   try {
@@ -79,5 +95,6 @@ app.get("/", (req, res) => {
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log("API running on port", PORT));
+
 
 
