@@ -2,7 +2,7 @@ import express from "express";
 import mysql from "mysql2/promise";
 
 const app = express();
-app.use(express.json());
+app.use(express.json({ limit: '10mb' }));
 
 const pool = mysql.createPool({
   host: "bzksakfqv7kdpsnpv6iv-mysql.services.clever-cloud.com",
@@ -78,3 +78,4 @@ app.get("/", (req, res) => {
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log("API running on port", PORT));
+
