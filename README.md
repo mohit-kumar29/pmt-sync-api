@@ -1,1 +1,1 @@
-# pmt-sync-api
+PMT Google Sheet → MySQL Sync API
